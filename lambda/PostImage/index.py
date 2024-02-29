@@ -1,3 +1,4 @@
+import base64
 import json
 import uuid
 import boto3
@@ -15,15 +16,29 @@ s3 = boto3.client('s3')
 
 def lambda_handler(event, context):
     try:
-        numero_identificacion = event['pathParameters']['numeroIdentificacion']
-        image_data = event['body']
+        print(event)
+        numero_identificacion = event['queryStringParameters']['numeroIdentificacion']
         image_key = f"{numero_identificacion}/{uuid.uuid4()}.jpg"
+
+        print(numero_identificacion)
+        print(image_key)
+
+        if event.get('isBase64Encoded', False):
+            print('isBase64Encoded')
+            image_data = base64.b64decode(event['body'])
+        else:
+            print('isNOTBase64Encoded')
+            image_data = event['body'].encode()
+
+        print(image_data)
 
         # Subir la imagen al bucket de S3
         s3.put_object(Bucket=BUCKET_NAME, Key=image_key, Body=image_data)
 
         # Construir la URL de CloudFront para la imagen
         cloudfront_image_url = f"{CLOUDFRONT_URL}/{image_key}"
+
+        print(cloudfront_image_url)
 
         # Actualizar el registro del usuario con la URL de CloudFront
         table.update_item(
