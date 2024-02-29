@@ -15,7 +15,8 @@ class ApiGatewayStack:
         api = apigw.RestApi(
             stack, "user-api",
             rest_api_name="User Service",
-            description="This service serves users."
+            description="This service serves users.",
+            binary_media_types=['multipart/form-data']
         )
 
         # Define API Gateway resources and methods
@@ -26,8 +27,8 @@ class ApiGatewayStack:
         user_api.add_method("DELETE", apigw.LambdaIntegration(lambda_stack.delete_user_lambda))
 
         # Define the API Gateway for image upload
-        # image_api = api.root.add_resource("images")
-        # image_api.add_method("POST", apigw.LambdaIntegration(post_image_lambda))
+        image_api = api.root.add_resource("images")
+        image_api.add_method("POST", apigw.LambdaIntegration(lambda_stack.post_image_lambda))
 
         # Create a deployment of the API
         api_deployment = apigw.Deployment(stack, "api-deployment", api=api)

@@ -28,7 +28,7 @@ stack = Stack(app, f"CashTodayStack-{env.capitalize()}")
 
 database_stack = DatabaseStack(stack, env_props)
 s3_stack = S3Stack(stack, env_props)
-lambda_stack = LambdaStack(stack, database_stack, s3_stack)
+lambda_stack = LambdaStack(stack, database_stack, s3_stack, s3_stack.distribution.distribution_domain_name)
 apigateway_stack = ApiGatewayStack(stack, lambda_stack)
 
 app.synth()
