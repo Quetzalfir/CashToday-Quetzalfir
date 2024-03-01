@@ -38,6 +38,7 @@ cdk deploy CashTodayStack-Dev --context env=dev --profile cashToday-dev-devops
 Despliega la pila CashTodayStack-Dev en el entorno de desarrollo (dev), usando el perfil cashToday-dev-devops. Esto crea o actualiza recursos en AWS según la definición de la pila.
 
 ## Uso de Colecciones y Entornos Postman
+![Modelo de Datos](/documents/image/postman.png)
 Para probar la API mediante Postman, sigue estos pasos:
 
 Descarga los archivos de colección y ambiente de la carpeta postman.
@@ -45,7 +46,8 @@ Abre Postman y selecciona "Import" para importar tanto la colección como el amb
 Selecciona el ambiente importado desde la esquina superior derecha para activarlo.
 Puedes comenzar a hacer solicitudes a la API seleccionando los endpoints definidos en la colección y ajustando los parámetros según sea necesario.
 Tokens de Acceso a las APIs
-Para utilizar los endpoints de la API, necesitarás tokens de acceso para cada uno de los ambientes (dev, uat, prod). Los tokens son:
+
+### Para utilizar los endpoints de la API, necesitarás tokens de acceso para cada uno de los ambientes (dev, uat, prod). Los tokens son:
 
 Desarrollo (dev): 123456
 
