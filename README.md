@@ -8,15 +8,15 @@
 
 ### Diagrama de Flujo
 
-![Diagrama de Flujo](link-a-tu-imagen)
+![Diagrama de Flujo](/documents/image/Flow.png)
 
 ### Solución AWS
 
-![Solución AWS](link-a-tu-imagen)
+![Solución AWS](/documents/image/Solution.png)
 
 ### Modelo de Datos
 
-![Modelo de Datos](link-a-tu-imagen)
+![Modelo de Datos](/documents/image/Model.png)
 
 ## Requerimientos Adicionales
 
@@ -47,9 +47,9 @@ Puedes comenzar a hacer solicitudes a la API seleccionando los endpoints definid
 Tokens de Acceso a las APIs
 Para utilizar los endpoints de la API, necesitarás tokens de acceso para cada uno de los ambientes (dev, uat, prod). Los tokens son:
 
-Desarrollo (dev): INSERTAR_TOKEN_AQUÍ
+Desarrollo (dev): 123456
 
-Pruebas de Aceptación del Usuario (uat): INSERTAR_TOKEN_AQUÍ
+Pruebas de Aceptación del Usuario (uat): abcdef
 
-Producción (prod): INSERTAR_TOKEN_AQUÍ
+Producción (prod): a1b2c3
 
