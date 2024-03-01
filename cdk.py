@@ -12,24 +12,27 @@ env = app.node.try_get_context('env')
 if env == 'prod':
     env_props = {
         'dynamodb_table_name': 'CashToday-Clients-Prod',
-        's3_bucket_name': 'cashtoday-user-images-prod'
+        's3_bucket_name': 'cashtoday-user-images-prod',
+        'secret': 'a1b2c3'
     }
 elif env == 'uat':
     env_props = {
         'dynamodb_table_name': 'CashToday-Clients-UAT',
-        's3_bucket_name': 'cashtoday-user-images-uat'
+        's3_bucket_name': 'cashtoday-user-images-uat',
+        'secret': 'abcdef'
     }
 else:  # Default to dev
     env_props = {
         'dynamodb_table_name': 'CashToday-Clients-Dev',
-        's3_bucket_name': 'cashtoday-user-images-dev'
+        's3_bucket_name': 'cashtoday-user-images-dev',
+        'secret': '123456'
     }
 
 stack = Stack(app, f"CashTodayStack-{env.capitalize()}")
 
 database_stack = DatabaseStack(stack, env_props)
 s3_stack = S3Stack(stack, env_props)
-lambda_stack = LambdaStack(stack, database_stack, s3_stack, s3_stack.distribution.distribution_domain_name)
+lambda_stack = LambdaStack(stack, database_stack, s3_stack, s3_stack.distribution.distribution_domain_name, env_props)
 apigateway_stack = ApiGatewayStack(stack, lambda_stack)
 
 # Tarda demasiado en ser deployado conciderando el tiempo y alcance del proyecto

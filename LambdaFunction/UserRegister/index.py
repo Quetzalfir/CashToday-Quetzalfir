@@ -4,6 +4,7 @@ import boto3
 from http import HTTPStatus
 
 TABLE_NAME = os.environ.get('TABLE_NAME', 'DefaultTableName')  # Añadido valor por defecto para pruebas
+ACCESS_TOKEN = os.environ.get('ACCESS_TOKEN')
 
 dynamodb = boto3.resource('dynamodb')
 table = dynamodb.Table(TABLE_NAME)
@@ -17,6 +18,20 @@ def add_user(body):
 
 def lambda_handler(event, context):
     try:
+        print(event)
+        # Obtener el token del header
+        token = event['headers'].get('Authorization')
+
+        print(token)
+        print(ACCESS_TOKEN)
+
+        # Verificar si el token coincide
+        if token != ACCESS_TOKEN:
+            return {
+                'statusCode': HTTPStatus.UNAUTHORIZED,
+                'body': json.dumps({'message': 'Unauthorized'})
+            }
+
         body = json.loads(event['body'])
         numero_identificacion = body['numeroIdentificacion']
 

@@ -3,7 +3,7 @@ from aws_cdk import aws_lambda as lambda_
 
 class LambdaStack:
 
-    def __init__(self, stack, database_stack, s3_stack, cloudfront_url) -> None:
+    def __init__(self, stack, database_stack, s3_stack, cloudfront_url, env_props: dict) -> None:
 
         # Define the Lambda functions
         self.user_register_lambda = lambda_.Function(
@@ -12,7 +12,8 @@ class LambdaStack:
             code=lambda_.Code.from_asset('LambdaFunction/UserRegister'),
             handler='index.lambda_handler',
             environment={
-                'TABLE_NAME': database_stack.table.table_name
+                'TABLE_NAME': database_stack.table.table_name,
+                'ACCESS_TOKEN': env_props['secret']
             }
         )
 
@@ -22,7 +23,8 @@ class LambdaStack:
             code=lambda_.Code.from_asset('LambdaFunction/UserSearch'),
             handler='index.lambda_handler',
             environment={
-                'TABLE_NAME': database_stack.table.table_name
+                'TABLE_NAME': database_stack.table.table_name,
+                'ACCESS_TOKEN': env_props['secret']
             }
         )
 
@@ -32,7 +34,8 @@ class LambdaStack:
             code=lambda_.Code.from_asset('LambdaFunction/DeleteUser'),
             handler='index.lambda_handler',
             environment={
-                'TABLE_NAME': database_stack.table.table_name
+                'TABLE_NAME': database_stack.table.table_name,
+                'ACCESS_TOKEN': env_props['secret']
             }
         )
 
@@ -42,7 +45,8 @@ class LambdaStack:
             code=lambda_.Code.from_asset('LambdaFunction/ModifyUser'),
             handler='index.lambda_handler',
             environment={
-                'TABLE_NAME': database_stack.table.table_name
+                'TABLE_NAME': database_stack.table.table_name,
+                'ACCESS_TOKEN': env_props['secret']
             }
         )
 
@@ -54,7 +58,8 @@ class LambdaStack:
             environment={
                 'TABLE_NAME': database_stack.table.table_name,
                 'BUCKET_NAME': s3_stack.bucket.bucket_name,
-                'CLOUDFRONT_URL': cloudfront_url
+                'CLOUDFRONT_URL': cloudfront_url,
+                'ACCESS_TOKEN': env_props['secret']
             }
         )
 

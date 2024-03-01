@@ -3,7 +3,11 @@ import os
 import boto3
 from http import HTTPStatus
 
+ACCESS_TOKEN = os.environ.get('ACCESS_TOKEN')
 dynamodb = boto3.resource('dynamodb')
+
+table_name = os.environ['TABLE_NAME']
+table = dynamodb.Table(table_name)
 
 
 def delete_user(table, numero_identificacion):
@@ -12,10 +16,17 @@ def delete_user(table, numero_identificacion):
 
 
 def lambda_handler(event, context):
-    table_name = os.environ['TABLE_NAME']
-    table = dynamodb.Table(table_name)
-
     try:
+        # Obtener el token del header
+        token = event['headers'].get('Authorization')
+
+        # Verificar si el token coincide
+        if token != ACCESS_TOKEN:
+            return {
+                'statusCode': HTTPStatus.UNAUTHORIZED,
+                'body': json.dumps({'message': 'Unauthorized'})
+            }
+
         numero_identificacion = event['queryStringParameters']['numeroIdentificacion']
         print(numero_identificacion)
 

@@ -8,6 +8,7 @@ from http import HTTPStatus
 TABLE_NAME = os.environ['TABLE_NAME']
 BUCKET_NAME = os.environ['BUCKET_NAME']
 CLOUDFRONT_URL = os.environ['CLOUDFRONT_URL']
+ACCESS_TOKEN = os.environ.get('ACCESS_TOKEN')
 
 dynamodb = boto3.resource('dynamodb')
 table = dynamodb.Table(TABLE_NAME)
@@ -26,7 +27,16 @@ def update_dynamodb_record(table, numero_identificacion, cloudfront_image_url):
 
 def lambda_handler(event, context):
     try:
-        print(event)
+        # Obtener el token del header
+        token = event['headers'].get('Authorization')
+
+        # Verificar si el token coincide
+        if token != ACCESS_TOKEN:
+            return {
+                'statusCode': HTTPStatus.UNAUTHORIZED,
+                'body': json.dumps({'message': 'Unauthorized'})
+            }
+
         numero_identificacion = event['queryStringParameters']['numeroIdentificacion']
         image_key = f"{numero_identificacion}/{uuid.uuid4()}.jpg"
 
