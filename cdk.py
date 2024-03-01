@@ -1,3 +1,4 @@
+from lib.elasticsearch_stack import ElasticsearchStack
 from lib.apigateway_stack import ApiGatewayStack
 from lib.database_stack import DatabaseStack
 from lib.lambda_stack import LambdaStack
@@ -30,5 +31,10 @@ database_stack = DatabaseStack(stack, env_props)
 s3_stack = S3Stack(stack, env_props)
 lambda_stack = LambdaStack(stack, database_stack, s3_stack, s3_stack.distribution.distribution_domain_name)
 apigateway_stack = ApiGatewayStack(stack, lambda_stack)
+
+# Tarda demasiado en ser deployado conciderando el tiempo y alcance del proyecto
+# por lo que es omitido, pero en la solucion ideal, el implementar ElasticSearch garantiza una alta cadencia de lectura
+# y resuelve el tema de busqueda en varias columnas
+#elasticksearch_stack = ElasticsearchStack(stack, database_stack)
 
 app.synth()

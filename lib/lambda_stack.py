@@ -9,7 +9,7 @@ class LambdaStack:
         self.user_register_lambda = lambda_.Function(
             stack, 'UserRegisterFunction',
             runtime=lambda_.Runtime.PYTHON_3_8,
-            code=lambda_.Code.from_asset('lambda/UserRegister'),
+            code=lambda_.Code.from_asset('LambdaFunction/UserRegister'),
             handler='index.lambda_handler',
             environment={
                 'TABLE_NAME': database_stack.table.table_name
@@ -19,7 +19,7 @@ class LambdaStack:
         self.user_search_lambda = lambda_.Function(
             stack, 'UserSearchFunction',
             runtime=lambda_.Runtime.PYTHON_3_8,
-            code=lambda_.Code.from_asset('lambda/UserSearch'),
+            code=lambda_.Code.from_asset('LambdaFunction/UserSearch'),
             handler='index.lambda_handler',
             environment={
                 'TABLE_NAME': database_stack.table.table_name
@@ -29,7 +29,7 @@ class LambdaStack:
         self.delete_user_lambda = lambda_.Function(
             stack, 'UserDeleteFunction',
             runtime=lambda_.Runtime.PYTHON_3_8,
-            code=lambda_.Code.from_asset('lambda/DeleteUser'),
+            code=lambda_.Code.from_asset('LambdaFunction/DeleteUser'),
             handler='index.lambda_handler',
             environment={
                 'TABLE_NAME': database_stack.table.table_name
@@ -39,7 +39,7 @@ class LambdaStack:
         self.modify_user_lambda = lambda_.Function(
             stack, 'UserModifyFunction',
             runtime=lambda_.Runtime.PYTHON_3_8,
-            code=lambda_.Code.from_asset('lambda/ModifyUser'),
+            code=lambda_.Code.from_asset('LambdaFunction/ModifyUser'),
             handler='index.lambda_handler',
             environment={
                 'TABLE_NAME': database_stack.table.table_name
@@ -49,7 +49,7 @@ class LambdaStack:
         self.post_image_lambda = lambda_.Function(
             stack, 'PostImageFunction',
             runtime=lambda_.Runtime.PYTHON_3_8,
-            code=lambda_.Code.from_asset('lambda/PostImage'),
+            code=lambda_.Code.from_asset('LambdaFunction/PostImage'),
             handler='index.lambda_handler',
             environment={
                 'TABLE_NAME': database_stack.table.table_name,

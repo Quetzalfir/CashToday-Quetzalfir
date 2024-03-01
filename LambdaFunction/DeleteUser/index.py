@@ -1,21 +1,26 @@
 import json
 import os
-
 import boto3
 from http import HTTPStatus
 
-TABLE_NAME = os.environ['TABLE_NAME']
-
 dynamodb = boto3.resource('dynamodb')
-table = dynamodb.Table(TABLE_NAME)
+
+
+def delete_user(table, numero_identificacion):
+    response = table.delete_item(Key={'numeroIdentificacion': numero_identificacion})
+    return response
+
 
 def lambda_handler(event, context):
+    table_name = os.environ['TABLE_NAME']
+    table = dynamodb.Table(table_name)
+
     try:
         numero_identificacion = event['queryStringParameters']['numeroIdentificacion']
         print(numero_identificacion)
 
         # Eliminar usuario
-        table.delete_item(Key={'numeroIdentificacion': numero_identificacion})
+        delete_user(table, numero_identificacion)
 
         return {
             'statusCode': HTTPStatus.OK,

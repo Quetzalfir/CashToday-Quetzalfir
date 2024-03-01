@@ -8,7 +8,8 @@ class DatabaseStack:
         self.table = ddb.Table(
             stack, 'Clients',
             table_name=env_props['dynamodb_table_name'],
-            partition_key={'name': 'numeroIdentificacion', 'type': ddb.AttributeType.STRING}
+            partition_key={'name': 'numeroIdentificacion', 'type': ddb.AttributeType.STRING},
+            stream=ddb.StreamViewType.NEW_IMAGE
         )
 
         # Agregar los índices secundarios globales

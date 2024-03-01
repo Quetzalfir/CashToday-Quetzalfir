@@ -1,0 +1,158 @@
+{
+	"info": {
+		"_postman_id": "d4ed4466-bc4a-486d-94f6-8ca3beebce71",
+		"name": "CashToday_Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14869661"
+	},
+	"item": [
+		{
+			"name": "Create User",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"numeroIdentificacion\": \"11112222\",\n  \"codigoPostal\": \"07268\",\n  \"pais\": \"Mexico\",\n  \"ciudad\": \"CDMX\",\n  \"nombreApellido\": \"FernandoValencia\",\n  \"nombre\": \"Fernando\",\n  \"apellido\": \"Valencia\"\n}"
+				},
+				"url": {
+					"raw": "{{dev_endpoint}}/users",
+					"host": [
+						"{{dev_endpoint}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search User",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{dev_endpoint}}/users?numeroIdentificacion=11112222",
+					"host": [
+						"{{dev_endpoint}}"
+					],
+					"path": [
+						"users"
+					],
+					"query": [
+						{
+							"key": "numeroIdentificacion",
+							"value": "11112222"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modify User",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"pais\": \"NuevoPais\",\n    \"ciudad\": \"NuevaCiudad\"\n}"
+				},
+				"url": {
+					"raw": "{{dev_endpoint}}/users?numeroIdentificacion={{userId}}",
+					"host": [
+						"{{dev_endpoint}}"
+					],
+					"path": [
+						"users"
+					],
+					"query": [
+						{
+							"key": "numeroIdentificacion",
+							"value": "{{userId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete User",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://i6zgiso82j.execute-api.us-east-1.amazonaws.com/dev/users?numeroIdentificacion={{userId}}",
+					"protocol": "https",
+					"host": [
+						"i6zgiso82j",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"dev",
+						"users"
+					],
+					"query": [
+						{
+							"key": "numeroIdentificacion",
+							"value": "{{userId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post User Image",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/path/to/file"
+						},
+						{
+							"key": "mimeType",
+							"value": "image/jpeg",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{dev_endpoint}}/images?numeroIdentificacion={{userId}}",
+					"host": [
+						"{{dev_endpoint}}"
+					],
+					"path": [
+						"images"
+					],
+					"query": [
+						{
+							"key": "numeroIdentificacion",
+							"value": "{{userId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
