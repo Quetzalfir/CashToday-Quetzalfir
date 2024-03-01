@@ -49,6 +49,8 @@ Tokens de Acceso a las APIs
 _____________________
 ### Para utilizar los endpoints de la API, necesitarás tokens de acceso para cada uno de los ambientes (dev, uat, prod). Los tokens son:
 
+Dev Endpoint API: https://i6zgiso82j.execute-api.us-east-1.amazonaws.com/dev
+
 Desarrollo (dev): 123456
 
 Pruebas de Aceptación del Usuario (uat): abcdef
